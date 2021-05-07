@@ -8,6 +8,7 @@ import java.util.Locale;
 public class FakerUtils {
 
     static public Faker faker = null;
+    static JSONObject json = new JSONObject();
 
     /**
      * singleton data faker
@@ -22,30 +23,35 @@ public class FakerUtils {
     }
 
     static public JSONObject fakeJsonData(Faker faker) {
-
-        JSONObject json = new JSONObject();
         /*
          * Random fields from data faker
+         *
          */
-        // json.put("firstname", String.valueOf(faker.number().randomNumber(8, true)));
 
         json.put("firstname", faker.name().firstName());
         json.put("lastname", faker.name().lastName());
-        json.put("age", faker.number().numberBetween(20,65));
-        json.put("sold", faker.)
-        json.put("age", faker.number().numberBetween(20,65));
-        json.put("age", faker.number().numberBetween(20,65));
-        json.put("age", faker.number().numberBetween(20,65));
-        json.put("age", faker.number().numberBetween(20,65));
-
-        //json.put("job", faker.job().position());
-        //Client : clientId, firstName, lastName, age, sold, typeCompte, limitedeComptePaiment,
-        // LimiteDecompteRetrait,decouvert, typeDeCarte,dateInscirption, idBanque(f)
-        //json.put("height", faker.number().numberBetween(150,201));
-        //json.put("weight", faker.number().numberBetween(45,120));
-        //json.put("city", faker.address().city());
+        json.put("age", faker.number().numberBetween(18,100));
+        json.put("sold", faker.number().numberBetween(-100, 50000));
+        json.put("typeAccount", faker.number().numberBetween(0,2));
+        json.put("dateInscription", faker.date());
+        json.put("clientId",faker.idNumber().invalid());
+        json.put("bankId",faker.idNumber().invalid());
+        json.put("typeCard", faker.number().numberBetween(0,3));
+        json.put("bankName",faker.name().name());
+        json.put("bankType",faker.number().numberBetween(0,3));
+        json.put("ammount",faker.number().numberBetween(1,10000));
 
         return json;
+    }
+
+    static public JSONObject createClient(Faker faker){
+        json.put("firstname", faker.name().firstName());
+        json.put("lastname", faker.name().lastName());
+        json.put("age", faker.number().numberBetween(20,65));
+        json.put("sold", faker.number().numberBetween(-100, 50000));
+        json.put("paiementLimit", faker.number().numberBetween(600,10000));
+        json.put("withdrawalLimit", faker.number().numberBetween(300,5000));
+
     }
 
     static public String convertDataTypeJavaSql(String type) {
